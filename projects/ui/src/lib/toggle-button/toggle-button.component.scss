@@ -1,0 +1,9 @@
+:host {
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  button.not-selected {
+    text-decoration: line-through;
+  }
+}

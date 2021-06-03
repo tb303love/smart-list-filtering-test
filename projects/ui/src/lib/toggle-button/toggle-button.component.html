@@ -1,0 +1,4 @@
+<button type="button" class="btn" [class.not-selected]="!value.checked" (click)="onClickButton()">
+  <ng-content></ng-content>
+</button>
+<input type="checkbox" [checked]="value.checked" />

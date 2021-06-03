@@ -1,0 +1,28 @@
+<div [formGroup]="newPostFromGroup" class="input-group mb-3">
+  <input
+    type="text"
+    class="form-control"
+    formControlName="title"
+    placeholder="Title"
+  />
+  <textarea
+    type="text"
+    class="form-control"
+    formControlName="body"
+    placeholder="Post content"
+  ></textarea>
+  <button
+    class="btn btn-outline-success"
+    [disabled]="newPostFromGroup.invalid"
+    (click)="createNewPost()"
+  >
+    Create new post
+  </button>
+  <button class="btn btn-outline-secondary" routerLink="/posts">Cancel</button>
+  <select formControlName="userId">
+    <option value="">Select user</option>
+    <option *ngFor="let user of users$ | async" [value]="user.id">
+      {{ user.name }}
+    </option>
+  </select>
+</div>

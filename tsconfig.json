@@ -1,0 +1,56 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {
+      "@origo/api/*": [
+        "projects/api/*",
+        "projects/api"
+      ],
+      "@origo/api": [
+        "dist/api/*",
+        "dist/api"
+      ],
+      "@origo/interfaces/*": [
+        "projects/interfaces/*",
+        "projects/interfaces"
+      ],
+      "@origo/interfaces": [
+        "dist/interfaces/*",
+        "dist/interfaces"
+      ],
+      "@origo/ui/*": [
+        "projects/ui/*",
+        "projects/ui"
+      ],
+      "@origo/ui": [
+        "dist/ui/*",
+        "dist/ui"
+      ]
+    },
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

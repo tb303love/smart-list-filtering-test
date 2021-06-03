@@ -1,0 +1,205 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "api": {
+      "projectType": "library",
+      "root": "projects/api",
+      "sourceRoot": "projects/api/src",
+      "prefix": "origo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/api/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/api/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/api/src/test.ts",
+            "tsConfig": "projects/api/tsconfig.spec.json",
+            "karmaConfig": "projects/api/karma.conf.js"
+          }
+        }
+      }
+    },
+    "interfaces": {
+      "projectType": "library",
+      "root": "projects/interfaces",
+      "sourceRoot": "projects/interfaces/src",
+      "prefix": "origo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/interfaces/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/interfaces/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/interfaces/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/interfaces/src/test.ts",
+            "tsConfig": "projects/interfaces/tsconfig.spec.json",
+            "karmaConfig": "projects/interfaces/karma.conf.js"
+          }
+        }
+      }
+    },
+    "smart-list-filtering-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/smart-list-filtering-test",
+      "sourceRoot": "projects/smart-list-filtering-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/smart-list-filtering-test",
+            "index": "projects/smart-list-filtering-test/src/index.html",
+            "main": "projects/smart-list-filtering-test/src/main.ts",
+            "polyfills": "projects/smart-list-filtering-test/src/polyfills.ts",
+            "tsConfig": "projects/smart-list-filtering-test/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/smart-list-filtering-test/src/favicon.ico",
+              "projects/smart-list-filtering-test/src/assets"
+            ],
+            "styles": [
+              "projects/smart-list-filtering-test/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/smart-list-filtering-test/src/environments/environment.ts",
+                  "with": "projects/smart-list-filtering-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "smart-list-filtering-test:build:production"
+            },
+            "development": {
+              "browserTarget": "smart-list-filtering-test:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "smart-list-filtering-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/smart-list-filtering-test/src/test.ts",
+            "polyfills": "projects/smart-list-filtering-test/src/polyfills.ts",
+            "tsConfig": "projects/smart-list-filtering-test/tsconfig.spec.json",
+            "karmaConfig": "projects/smart-list-filtering-test/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/smart-list-filtering-test/src/favicon.ico",
+              "projects/smart-list-filtering-test/src/assets"
+            ],
+            "styles": [
+              "projects/smart-list-filtering-test/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "ui": {
+      "projectType": "library",
+      "root": "projects/ui",
+      "sourceRoot": "projects/ui/src",
+      "prefix": "origo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ui/src/test.ts",
+            "tsConfig": "projects/ui/tsconfig.spec.json",
+            "karmaConfig": "projects/ui/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "smart-list-filtering-test"
+}

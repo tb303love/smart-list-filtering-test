@@ -1,0 +1,159 @@
+<button class="btn btn-primary" routerLink="new">Create new post</button>
+<ui-simple-pagination
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="INITIAL_PAGE_SIZE_OPTIONS.length"
+  [pageSize]="INITIAL_PAGE_SIZE_OPTIONS.pageSize"
+  (onItemsPerPageChange)="onPageChange($event)"
+  [disabled]="isLoading"
+></ui-simple-pagination>
+<ng-container *ngIf="isLoading; else notLoading">
+  <svg
+    width="57"
+    height="57"
+    viewBox="0 0 57 57"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke="#fff"
+  >
+    <g fill="red" fill-rule="evenodd">
+      <g transform="translate(1 1)" stroke-width="2">
+        <circle cx="5" cy="50" r="5">
+          <animate
+            attributeName="cy"
+            begin="0s"
+            dur="2.2s"
+            values="50;5;50;50"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="cx"
+            begin="0s"
+            dur="2.2s"
+            values="5;27;49;5"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="27" cy="5" r="5">
+          <animate
+            attributeName="cy"
+            begin="0s"
+            dur="2.2s"
+            from="5"
+            to="5"
+            values="5;50;50;5"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="cx"
+            begin="0s"
+            dur="2.2s"
+            from="27"
+            to="27"
+            values="27;49;5;27"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="49" cy="50" r="5">
+          <animate
+            attributeName="cy"
+            begin="0s"
+            dur="2.2s"
+            values="50;50;5;50"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="cx"
+            from="49"
+            to="49"
+            begin="0s"
+            dur="2.2s"
+            values="49;5;27;49"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
+    </g>
+  </svg>
+</ng-container>
+<ng-template #notLoading>
+  <ng-container
+    *ngIf="
+      postsWithComments && postsWithComments.length;
+      else noPostItemsFromResponse
+    "
+  >
+    <div [formGroup]="localListFilter">
+      <fieldset formArrayName="items">
+        <legend>Filter list by User ID</legend>
+        <ui-toggle-button
+          *ngFor="let control of listControls; let i = index"
+          [formControlName]="i"
+        >
+          {{ control.value.value }}
+        </ui-toggle-button>
+      </fieldset>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      [formControl]="search"
+      placeholder="Search by title"
+    />
+    <ng-container
+      *ngIf="
+        postsWithComments
+          | filterByTitle: search.value
+          | filterByUserId: localListFilter.value.items as filteredPostItems
+      "
+      ><ul
+        class="list-group"
+        *ngIf="filteredPostItems.length; else noPostsItems"
+      >
+        <li
+          class="list-group-item"
+          *ngFor="let post of filteredPostItems; trackBy: trackById"
+        >
+          <app-post-item
+            [postWithComments]="post"
+            (onClickToggleComments)="onClickLoadComment(post.id)"
+          ></app-post-item>
+          <div>
+            <button
+              class="btn btn-outline-primary"
+              [routerLink]="[post.userId]"
+            >
+              Details
+            </button>
+
+            <button
+              class="btn btn-danger remove-item"
+              (click)="onClickDeletePost(post.id)"
+            >
+              Remove item
+            </button>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
+</ng-template>
+<ng-template #noPostItemsFromResponse>
+  <h2>No post items from server</h2>
+  <p>Click to reload</p>
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="onClickReload()"
+  >
+    Reload
+  </button>
+  <p>Or back to previous</p>
+</ng-template>
+<ng-template #noPostsItems>
+  <h2>No post items to show due to filtering selection</h2>
+</ng-template>

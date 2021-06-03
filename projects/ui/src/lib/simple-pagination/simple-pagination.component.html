@@ -1,0 +1,26 @@
+<fieldset [disabled]="disabled">
+  <label class="input-group mb-3">
+    <span>Items per page:</span>
+    <select (change)="onChange($event)" [value]="pageSize">
+      <option *ngFor="let option of pageSizeOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </label>
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="previousPage()"
+    [disabled]="!hasPreviousPage()"
+  >
+    Previous page
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="nextPage()"
+    [disabled]="!hasNextPage()"
+  >
+    Next page
+  </button>
+</fieldset>

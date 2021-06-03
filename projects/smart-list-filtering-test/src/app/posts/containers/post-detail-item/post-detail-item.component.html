@@ -1,0 +1,10 @@
+<div class="card" *ngIf="post$ | async as post; else error">
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <p>ID: {{post.id}}</p>
+    <p>User ID: {{post.userId}}</p>
+    <p class="card-text">{{post.body}}</p>
+    <a routerLink="/posts" class="btn btn-primary">Back to posts</a>
+  </div>
+</div>
+<ng-template #error>This post does not exist</ng-template>
