@@ -1,4 +1,27 @@
-# AngularTest
+# Angular Test Workspace
+
+## Project description
+This project uses `workspace` which gives us developers more control over how we build and ship our modules.
+
+It makes really easy to share common features when packed in to a module, even with other developers who work on a different technology.
+
+E.g `Express JS` with `Typescript` and `Angular` developers can benefit from `interfaces` library.
+
+Workspace consists of libraries and projects that consume those libraries.
+Libraries:
+- api
+  - At first glance, this might be an overkill, but let say we have other `Angular` projects that uses the same `API` services to make a successfull `REST` call.
+- interfaces
+  - common sharable footprints of objects that can be found in `REST` calls, helper methods, etc...
+- ui
+  - This library consist of reusable UI elements that can be shared among other `Angular` projects. The power comes when designing UI kits with design system specification.
+
+Projects:
+- smart-list-filtering-test
+  - the projects itself that showcases feature requirements, but also how it consumes libraries mentioned above.
+
+## Before you start
+Make sure tu run `npm run build:all` before running `ng-serve`
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
 
