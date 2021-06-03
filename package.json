@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:all": "ng build ui && ng build api && ng build interfaces"
+    "build:all": "ng build interfaces && ng build api && ng build ui"
   },
   "private": true,
   "dependencies": {
